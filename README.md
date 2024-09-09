@@ -148,9 +148,8 @@ npm run worker:resume
 
 All available actions are documented in this section; to better describe every action and assist the reader, the following type conventions will be used:
 
-- `uint_t` a *positive*, *non-decimal* number
+- `int_t` a *non-decimal* number
 - `string_t` a *non-empty*, *trimmed* string
-- `int_t` a *non-negative*, *non-decimal* number
 - `sort_t` a *trimmed*, *case-insensitve* string whose only possible values are *ASC* and *DESC*
 - `bool_t` a boolean where `1`, `"true"`, `"1"`, `"on"` and `true` will be evaluated as *true*, while `0`, `"false"`, `"0"`, `"off"` and `false` will be treated as *false*
 
@@ -160,16 +159,16 @@ Get departments list ordered by name in ascending order. All of the following ar
 
   - `args <Array>`
     - `0 <Object>`
-      - `limit <uint_t>` maximum number of results
-      - `offset <uint_t>` offset of the first result to return
+      - `limit <int_t>` maximum number of results as a *positive* integer
+      - `offset <int_t>` offset of the first result as a *non-negative* integer
       - `sort <sort_t>` sort direction
-      - `pid <uint_t>` department parent identifier
+      - `pid <int_t>` department parent identifier as a *positive* integer
       - `name <string_t>` a *single-line*, *case-insensitve* string that has to be contained in the department name (no more than *128 characters*)
 
 **Response:**
 
   - `<Array>` The departments list. Each list item will have the following properties:
-    - `id <uint_t>` department identifier
+    - `id <int_t>` department identifier as a *positive* integer
     - `name <string_t>` department name
 
 **Example Response:**
@@ -189,8 +188,8 @@ Get topics list ordered by name in ascending order. All of the following argumen
 
   - `args <Array>`
     - `0 <Object>`
-      - `limit <uint_t>` maximum number of results
-      - `offset <uint_t>` offset of the first result to return
+      - `limit <int_t>` maximum number of results as a *positive* integer
+      - `offset <int_t>` offset of the first result as a *non-negative* integer
       - `sort <sort_t>` sort direction
       - `is_active <bool_t>` whether or not topic is active
       - `name <string_t>` a *single-line*, *case-insensitve* string that has to be contained in the topic name (no more than *32 characters*)
@@ -199,8 +198,8 @@ Get topics list ordered by name in ascending order. All of the following argumen
 
   - `<Array>` The topics list. Each list item will have the following properties:
     - `name <string_t>` topic name
-    - `id <uint_t>` topic identifier
-    - `pid <int_t>` topic parent identifier if it exists, *0* otherwise
+    - `id <int_t>` topic identifier as a *positive* integer
+    - `pid <int_t>` topic parent identifier as a *positive* integer if it exists, *0* otherwise
 
 **Example Response:**
 
@@ -222,8 +221,8 @@ Get tags list ordered as configured on the helpdesk backend in ascending order. 
 
   - `args <Array>`
     - `0 <Object>`
-      - `limit <uint_t>` maximum number of results
-      - `offset <uint_t>` offset of the first result to return
+      - `limit <int_t>` maximum number of results as a *positive* integer
+      - `offset <int_t>` offset of the first result as a *non-negative* integer
       - `sort <sort_t>` sort direction
       - `is_active <bool_t>` whether or not tag is active
       - `name <string_t>` a *single-line*, *case-insensitve* string that has to be contained in the tag name (no more than *255 characters*)
@@ -231,7 +230,7 @@ Get tags list ordered as configured on the helpdesk backend in ascending order. 
 **Response:**
 
   - `<Array>` The tags list. Each list item will have the following properties:
-    - `id <uint_t>` tag identifier
+    - `id <int_t>` tag identifier as a *positive* integer
     - `name <string_t>` tag name
 
 **Example Response:**
@@ -251,12 +250,12 @@ Get agents list ordered by username in ascending order. All of the following arg
 
   - `args <Array>`
     - `0 <Object>`
-      - `limit <uint_t>` maximum number of results
-      - `offset <uint_t>` offset of the first result to return
+      - `limit <int_t>` maximum number of results as a *positive* integer
+      - `offset <int_t>` offset of the first result as a *non-negative* integer
       - `sort <sort_t>` sort direction
       - `is_locked <bool_t>` whether or not agent is locked
       - `on_vacation <bool_t>` whether or not agent is on vacation
-      - `department_id <uint_t>` department identifier associated with the agent
+      - `department_id <int_t>` department identifier associated with the agent as a *positive* integer
       - `name <string_t>` a *single-line*, *case-insensitve* string that has to be contained in the agent name (no more than *64 characters*)
 
 **Response:**
@@ -264,7 +263,7 @@ Get agents list ordered by username in ascending order. All of the following arg
   - `<Array>` The agents list. Each list item will have the following properties:
     - `username <string_t>` agent username
     - `email <string_t>` agent e-mail address
-    - `id <uint_t>` agent identifier
+    - `id <int_t>` agent identifier as a *positive* integer
 
 **Example Response:**
 
@@ -284,8 +283,8 @@ Get teams list ordered by name in ascending order. All of the following argument
 
   - `args <Array>`
     - `0 <Object>`
-      - `limit <uint_t>` maximum number of results
-      - `offset <uint_t>` offset of the first result to return
+      - `limit <int_t>` maximum number of results as a *positive* integer
+      - `offset <int_t>` offset of the first result as a *non-negative* integer
       - `sort <sort_t>` sort direction
       - `is_empty <bool_t>` whether or not team is empty
       - `is_active <bool_t>` whether or not team is active
@@ -295,8 +294,8 @@ Get teams list ordered by name in ascending order. All of the following argument
 
   - `<Array>` The teams list. Each list item will have the following properties:
     - `name <string_t>` team name
-    - `id <uint_t>` team identifier
-    - `active_members <int_t>` number of active team members
+    - `id <int_t>` team identifier as a *positive* integer
+    - `active_members <int_t>` number of active team members as a *non-negative* integer
 
 **Example Response:**
 
