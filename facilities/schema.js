@@ -130,8 +130,8 @@ const listParamsSchema = new Schema(baseSchema)
  */
 const listProperties = new Schema()
   .set('sort', 'sort_t|optional')
-  .set('limit', 'uint_t|optional')
-  .set('offset', 'uint_t|optional')
+  .set('limit', 'int_t|optional|positive')
+  .set('offset', 'int_t|optional|min:0x00')
 
 /**
  * <p>
@@ -142,8 +142,8 @@ const listProperties = new Schema()
  * @property {Object} Type
  *   Schema of all custom types.
  *
- * @property {Object} Type.uint_t
- *   Schema of an unsigned integer type.
+ * @property {Object} Type.int_t
+ *   Schema of an integer type.
  * @property {Object} Type.bool_t
  *   Schema of a boolean type.
  * @property {Object} Type.string_t
@@ -171,14 +171,13 @@ const listProperties = new Schema()
 module.exports = {
   Schema: {
     Type: {
-      uint_t: new Schema()
+      int_t: new Schema()
         .set('convert', true)
         .set('integer', true)
-        .set('positive', true)
         .set('type', 'number')
         .set('nullable', false)
         .set('messages', new Schema()
-          .set('required', "The '{field}' field must be a positive integer.")
+          .set('required', "The '{field}' field must be an integer.")
           .get()
         )
         .get(),
@@ -219,7 +218,7 @@ module.exports = {
     List: {
       Departments: new Schema(listParamsSchema)
         .set('properties', new Schema(listProperties)
-          .set('pid', 'uint_t|optional')
+          .set('pid', 'int_t|optional|positive')
           .set('name', 'string_t|optional|singleLine|max:0x80')
           .get()
         )
@@ -245,7 +244,7 @@ module.exports = {
         .set('properties', new Schema(listProperties)
           .set('is_locked', 'bool_t|optional')
           .set('on_vacation', 'bool_t|optional')
-          .set('department_id', 'uint_t|optional')
+          .set('department_id', 'int_t|optional|positive')
           .set('name', 'string_t|optional|singleLine|max:0x40')
           .get()
         )
