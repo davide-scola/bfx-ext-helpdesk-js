@@ -263,7 +263,9 @@ class ExtHelpdesk extends Api {
       if (success === true) {
         scheduler.put(cb, () => this._fetchList(ua, endpoint, params))
       } else {
-        cb(new Error(`ERR_API_ACTION: ${success[0].message}`))
+        cb(new Error(`ERR_API_ACTION: Something's not quite right....\n${success.map((error) => {
+          return '\t!! ' + error.message
+        }).join('\n')}`))
       }
     })
   }
