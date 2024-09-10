@@ -40,7 +40,6 @@ const Validator = require('fastest-validator')
  */
 const v = new Validator({
   aliases: Schema.Type,
-  haltOnFirstError: true,
   considerNullAsAValue: true
 })
 
